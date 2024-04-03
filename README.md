@@ -27,6 +27,7 @@ python3 main.py
 
 ## Credits
 
+- [Free Dictionary API](https://dictionaryapi.dev/)
 - [Contributors](https://github.com/FayasNoushad/Telegram-Dictionary-Bot/graphs/contributors)
 - [Pyrogram](https://github.com/pyrogram/pyrogram)
 
