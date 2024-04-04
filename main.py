@@ -20,6 +20,10 @@ HELP_TEXT = """--**More Help**--
 
 - Just send a word to get the meaning of it.
 - I will provide you the meaning of the word.
+
+- You can also use me in groups using /dict command
+  eg:- `/dict Hello`
+- I will provide you the meaning of the word.
 """
 
 ABOUT_TEXT = """--**About Me**--
@@ -124,6 +128,20 @@ async def send_about(bot, message):
         disable_web_page_preview=True,
         quote=True,
         reply_markup=ABOUT_BUTTONS
+    )
+
+
+@Bot.on_message(filters.command(["dict", "dictionary", "word"]))
+async def cmd_filter_dictionary(_, message):
+    m = await message.reply_text(
+        text="Searching...",
+        quote=True
+    )
+    word = message.text.split(" ", 1)[1]
+    details = dictionary.dictionary(word)
+    await m.edit_text(
+        text=details,
+        disable_web_page_preview=True
     )
 
 
