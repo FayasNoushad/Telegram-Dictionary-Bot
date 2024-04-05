@@ -23,6 +23,7 @@ HELP_TEXT = """--**More Help**--
 
 - You can also use me in groups using /dict command
   eg:- `/dict Hello`
+- or, Send a word and reply /dict
 - I will provide you the meaning of the word.
 """
 
@@ -137,7 +138,17 @@ async def cmd_filter_dictionary(_, message):
         text="Searching...",
         quote=True
     )
-    word = message.text.split(" ", 1)[1]
+    if (len(message.text.split(" ")) == 1):
+        if (message.reply_to_message) and (message.reply_to_message.text):
+            word = message.reply_to_message.text
+        else:
+            await m.edit_text(
+                text="Reply to a text message containing the word.",
+                disable_web_page_preview=True
+            )
+            return
+    else:
+        word = message.text.split(" ", 1)[1]
     details = dictionary.dictionary(word)
     await m.edit_text(
         text=details,
